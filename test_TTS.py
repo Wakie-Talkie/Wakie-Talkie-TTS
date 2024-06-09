@@ -42,10 +42,12 @@ tts = TTS("tts_models/multilingual/multi-dataset/xtts_v2").to(device)
 # Text to speech list of amplitude values as output
 # wav = tts.tts(text="Hello world!", speaker_wav="my/cloning/audio.wav", language="en")
 # Text to speech to a file
-text = "Oh, I absolutely loved 'Parasite'! It's such a brilliantly crafted film that expertly blends dark comedy, drama, and satire. The storytelling is incredibly engaging and the social commentary is thought-provoking. The performances are outstanding, especially Song Kang-ho's portrayal of the father character. The cinematography and direction by Bong Joon-ho are top-notch. Overall, 'Parasite' is a masterpiece that deserved all the accolades it received, including the Academy Award for Best Picture. Have you seen it?"
-sentences = sent_tokenize(text)
-print(sentences)
-i = 0
-for sentence in sentences:
-    tts.tts_to_file(text=sentence, speaker_wav="my/cloning/example_en.wav", language="en", file_path=f"my/output/output_{str(i)}.mp3")
-    i = i+1
+text = "Oh, I absolutely loved 'Parasite'!"
+# wav = tts.tts(text=text, speaker_wav="my/ai_voice/eunhwa.mp3", language="en")
+# print(type(wav))
+# sentences = sent_tokenize(text))
+# print(sentences)
+# i = 0
+# for sentence in sentences:
+#     tts.tts_to_file(text=sentence, speaker_wav="my/cloning/example_en.wav", language="en", file_path=f"my/output/output_{str(i)}.mp3")
+#     i = i+1
