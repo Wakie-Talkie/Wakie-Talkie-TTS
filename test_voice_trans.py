@@ -1,13 +1,11 @@
 from fastapi import FastAPI, UploadFile, File, Response, HTTPException
 from pydantic import BaseModel
-# import torch
-# from TTS.api import TTS
-# import numpy as np
+import torch
+from TTS.api import TTS
+import numpy as np
 import os
 import shutil
 import mimetypes
-from openai import OpenAI
-from typing import List
 
 app = FastAPI()
 device = "cuda" if torch.cuda.is_available() else "cpu"
