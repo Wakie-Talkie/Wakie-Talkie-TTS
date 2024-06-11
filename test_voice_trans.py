@@ -76,7 +76,7 @@ async def TtsAiVoice(request: TextToSpeechRequest):
         audio_data = file.read()
 
     print(file.content_type)
-    return Response(content=audio_data, media_type=file.content_type)
+    return Response(content=audio_data, media_type='audio/mpeg')
 
 if __name__=="__main__":
     import uvicorn
