@@ -70,6 +70,7 @@ async def TtsAiVoice(request: TextToSpeechRequest):
 
     speaker_audio_path = find_file_by_name(voice)
     print(speaker_audio_path)
+    print(language)
 
     tts.tts_to_file(text=text, speaker_wav=speaker_audio_path, language=language,file_path=file_path)
     with open(file_path, 'rb') as file:
