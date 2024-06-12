@@ -33,13 +33,15 @@ CUSTOM_MIME_TYPE_MAPPING = {
 
 @app.post("/upload-ai-voice/")
 async def UploadAiVoice(file: UploadFile = File(...)):
-    upload_dir = "my/ai_voice"
+    upload_dir = "my/ai_voice/"
+    os.makedirs(os.path.dirname(upload_dir), exist_ok=True)
     extension = mimetypes.guess_extension(file.content_type)
     if not extension:
         # Check custom MIME type mapping
         extension = CUSTOM_MIME_TYPE_MAPPING.get(file.content_type)
     if not extension:
         return {"error": "Unsupported file type"}
+    os.makedirs(os.path.dirname(upload_dir), exist_ok=True)
     file_path = os.path.join(upload_dir, file.filename + extension)
 
     with open(file_path, "wb") as buffer:
@@ -48,7 +50,7 @@ async def UploadAiVoice(file: UploadFile = File(...)):
     return {"complete-msg": "upload ai-voice complete"}
 
 def find_file_by_name(file_name: str) -> str:
-    upload_dir = "my/ai_voice"
+    upload_dir = "my/ai_voice/"
     matching_files = []
     for file in os.listdir(upload_dir):
         if os.path.splitext(file)[0] == file_name:
@@ -58,37 +60,6 @@ def find_file_by_name(file_name: str) -> str:
         return "no_file_found"
     print(matching_files[0])
     return matching_files[0]
-#
-# @app.post("/tts-openai/")
-# async def TtsAiVoice(request: TextToSpeechRequest):
-#     text = request.text
-#     language = request.language
-#     voice = request.voice
-#
-#     check_file_path = f"my/output/{voice}_{language}.mp3"
-#     if os.path.exists(check_file_path):
-#         os.remove(check_file_path)
-#
-#     os.makedirs(os.path.dirname("my/output/"), exist_ok=True)
-#     file_path = os.path.join("my/output/", f"{voice}_{language}.mp3")
-#
-#     speaker_audio_path = find_file_by_name(voice)
-#     print(speaker_audio_path)
-#     print(language)
-#
-#     response = client.audio.speech.create(
-#         model="tts-1",
-#         voice="alloy",
-#         input=text
-#     )
-#
-#     response.stream_to_file(file_path)
-#
-#     with open(file_path, 'rb') as file:
-#         audio_data = file.read()
-#
-#     return Response(content=audio_data, media_type='audio/mpeg')
-
 
 @app.post("/tts/")
 async def TtsAiVoice(request: TextToSpeechRequest):
@@ -96,6 +67,7 @@ async def TtsAiVoice(request: TextToSpeechRequest):
     language = request.language
     voice = request.voice
 
+    print(f"voice {voice} language {language} text {text}")
     start_time = time.time()
     file_path = f"my/output/{voice}_{language}.mp3"
     if os.path.exists(file_path):
@@ -125,7 +97,7 @@ async def TtsAiVoice(request: TextToSpeechRequest):
     elasped_time = end_time - start_time
     print(f"generate tts audio data : {elasped_time}")
 
-    print(file.content_type)
+    # print(file.content_type)
     return Response(content=audio_data, media_type='audio/mpeg')
 
 if __name__=="__main__":
