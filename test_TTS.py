@@ -42,7 +42,8 @@ tts = TTS("tts_models/multilingual/multi-dataset/xtts_v2").to(device)
 # Text to speech list of amplitude values as output
 # wav = tts.tts(text="Hello world!", speaker_wav="my/cloning/audio.wav", language="en")
 # Text to speech to a file
-text = "Oh, I absolutely loved 'Parasite'!"
+text = "\"Mad Max: Fury Road\" follows Max and Furiosa as they team up to escape a tyrannical warlord in a post-apocalyptic wasteland. The film is packed with intense car chases and stunning visuals."
+tts.tts_to_file(text=text, speaker_wav="my/ai_voice/eunhwa.mp3", language="en", file_path=f"my/output/output_eunhwa.mp3")
 # wav = tts.tts(text=text, speaker_wav="my/ai_voice/eunhwa.mp3", language="en")
 # print(type(wav))
 # sentences = sent_tokenize(text))
