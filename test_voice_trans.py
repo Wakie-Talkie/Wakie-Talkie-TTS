@@ -74,7 +74,7 @@ async def TtsAiVoice(request: TextToSpeechRequest):
         os.remove(file_path)
 
     os.makedirs(os.path.dirname("my/output/"), exist_ok=True)
-    file_path = os.path.join("my/output/", f"{voice}_{language}.mp3")
+    file_path = os.path.join("my/output/", f"{voice}_{language}.wav")
 
     end_time = time.time()
     elasped_time = end_time - start_time
@@ -89,16 +89,16 @@ async def TtsAiVoice(request: TextToSpeechRequest):
     print(f"find voice file path : {elasped_time}")
 
     start_time = time.time()
-    tts.tts_to_file(text=text, speaker_wav=speaker_audio_path, language=language,file_path=file_path)
+    tts.tts_to_file(text=text, speaker_wav=speaker_audio_path, language=language, speed=1.5,file_path=file_path)
     with open(file_path, 'rb') as file:
         audio_data = file.read()
 
     end_time = time.time()
     elasped_time = end_time - start_time
     print(f"generate tts audio data : {elasped_time}")
-
+    # 'application/octet-stream'
     # print(file.content_type)
-    return Response(content=audio_data, media_type='audio/mpeg')
+    return Response(content=audio_data, media_type='audio/wav')
 
 if __name__=="__main__":
     import uvicorn
