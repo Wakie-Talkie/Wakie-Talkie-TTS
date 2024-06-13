@@ -87,7 +87,8 @@ async def TtsAiVoice(request: TextToSpeechRequest):
     end_time = time.time()
     elasped_time = end_time - start_time
     print(f"find voice file path : {elasped_time}")
-
+    if language == "zh":
+        language = "zh-cn"
     start_time = time.time()
     tts.tts_to_file(text=text, speaker_wav=speaker_audio_path, language=language, speed=1.5,file_path=file_path)
     with open(file_path, 'rb') as file:
