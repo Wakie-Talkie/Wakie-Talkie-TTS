@@ -69,7 +69,7 @@ async def TtsAiVoice(request: TextToSpeechRequest):
 
     print(f"voice {voice} language {language} text {text}")
     start_time = time.time()
-    file_path = f"my/output/{voice}_{language}.mp3"
+    file_path = f"my/output/{voice}_{language}.wav"
     if os.path.exists(file_path):
         os.remove(file_path)
 
