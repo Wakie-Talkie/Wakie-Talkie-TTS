@@ -6,7 +6,6 @@ import numpy as np
 import os
 import shutil
 import mimetypes
-# from openai import OpenAI
 import time
 
 app = FastAPI()
